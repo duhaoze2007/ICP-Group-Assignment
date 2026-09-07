@@ -1,4 +1,4 @@
-# SDAMS Project – Source Code & Documentation Structure (Brief)
+# ICS Project – Source Code & Documentation Structure (Brief)
 
 ## 📁 Project Root Directory (GitHub Repo): `ICP-Group-Assignment/`
 
