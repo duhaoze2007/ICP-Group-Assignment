@@ -2,8 +2,6 @@
 
 ## 📁 Project Root Directory (GitHub Repo): `ICP-Group-Assignment/`
 
-> Empty-named file is for GitHub doesn't allow empty folder to be committed.
-
 [GitHub Repo Link](https://github.com/duhaoze2007/ICP-Group-Assignment)
 
 ```text
