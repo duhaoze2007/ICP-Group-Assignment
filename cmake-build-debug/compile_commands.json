@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/admin.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/admin.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/admin.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/admin.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/auth.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/auth.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/auth.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/auth.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/facility_officer.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/facility_officer.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/facility_officer.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/facility_officer.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/file_handler.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/file_handler.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/file_handler.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/file_handler.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/instructor.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/instructor.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/instructor.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/instructor.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/main.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/main.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/main.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/main.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/manager.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/manager.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/manager.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/manager.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/reports.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/reports.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/reports.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/reports.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/student.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/student.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/student.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/student.c.o"
+},
+{
+  "directory": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug",
+  "command": "/usr/bin/cc -I/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/include -g -std=gnu11 -arch arm64 -fcolor-diagnostics -o CMakeFiles/ICP_Group_Assignment.dir/src/utils.c.o -c /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/utils.c",
+  "file": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/src/utils.c",
+  "output": "/Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug/CMakeFiles/ICP_Group_Assignment.dir/src/utils.c.o"
+}
+]

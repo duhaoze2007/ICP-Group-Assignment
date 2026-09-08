@@ -1,0 +1,10 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment -B /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug
+-- The C compiler identification is AppleClang 21.0.0.21000101
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/duhaoze/Documents/CLionProjects/ICP-Group-Assignment/cmake-build-debug
