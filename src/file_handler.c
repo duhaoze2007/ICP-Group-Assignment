@@ -28,6 +28,10 @@
 /* The single in-memory database shared by every module (declared in common.h). */
 DataStore g_data;
 
+/* Folder that holds every data file.  Resolved at start-up by
+ * resolve_data_dir() instead of being hard-wired to "./data". */
+static char data_dir_path[512] = DATA_DIR;
+
 #define INITIAL_CAPACITY 32
 
 /* =====================================================================
@@ -57,9 +61,9 @@ static char *dup_str(const char *src) {
     return out;
 }
 
-/* Build "data/<filename>" in caller supplied buffer. */
+/* Build "<data dir>/<filename>" in caller supplied buffer. */
 static void data_path(char *out, size_t size, const char *filename) {
-    snprintf(out, size, "%s/%s", DATA_DIR, filename);
+    snprintf(out, size, "%s/%s", data_dir_path, filename);
 }
 
 static int ensure_array_capacity(char ***arr, size_t *cap, size_t needed) {
@@ -181,7 +185,105 @@ void free_lines(char **lines, size_t count) {
 }
 
 /* =====================================================================
- * 2. Run-time line cache (keeps main.c's File Resource Manager menu and
+ * 2. Data directory resolution
+ * =====================================================================
+ * The data folder must be found even when the program is not started from
+ * the project root (CLion starts it inside cmake-build-debug/).  Without
+ * this, fopen() would fail and every write would print
+ * "Warning: could not write to data/system.log".
+ */
+
+const char *get_data_dir(void) {
+    return data_dir_path;
+}
+
+int set_data_dir(const char *dir) {
+    if (dir == NULL || dir[0] == '\0') return -1;
+    snprintf(data_dir_path, sizeof data_dir_path, "%s", dir);
+    return 0;
+}
+
+static int is_directory(const char *path) {
+    struct stat st;
+    if (path == NULL || path[0] == '\0') return 0;
+    if (stat(path, &st) != 0) return 0;
+    return S_ISDIR(st.st_mode) ? 1 : 0;
+}
+
+/* Join a base folder with the data folder name:  "proj" -> "proj/data",
+ * "." and "" -> "data". */
+static void join_data_dir(char *out, size_t size, const char *base) {
+    size_t len;
+
+    if (base == NULL || base[0] == '\0' || strcmp(base, ".") == 0) {
+        snprintf(out, size, "%s", DATA_DIR);
+        return;
+    }
+    len = strlen(base);
+    if (base[len - 1] == '/') snprintf(out, size, "%s%s", base, DATA_DIR);
+    else                      snprintf(out, size, "%s/%s", base, DATA_DIR);
+}
+
+int resolve_data_dir(const char *argv0) {
+    char   candidate[512];
+    char   exe_dir[512];
+    char   parent[512];
+    size_t i;
+
+    /* 1. the conventional location: <current directory>/data */
+    if (is_directory(DATA_DIR)) {
+        return set_data_dir(DATA_DIR);
+    }
+
+    /* 2. walk up a few levels - covers "started from cmake-build-debug" */
+    for (i = 1; i <= 4; i++) {
+        size_t k, pos = 0;
+        for (k = 0; k < i && pos + 3 < sizeof candidate; k++) {
+            candidate[pos++] = '.';
+            candidate[pos++] = '.';
+            candidate[pos++] = '/';
+        }
+        candidate[pos] = '\0';
+        join_data_dir(candidate + pos, sizeof candidate - pos, ".");
+        if (is_directory(candidate)) return set_data_dir(candidate);
+    }
+
+    /* 3./4. next to the executable, and one level above it */
+    if (argv0 != NULL && strchr(argv0, '/') != NULL) {
+        const char *slash = strrchr(argv0, '/');
+        size_t      len  = (size_t)(slash - argv0);
+
+        if (len == 0) len = 1;                    /* "/sdams" -> "/" */
+        if (len >= sizeof exe_dir) len = sizeof exe_dir - 1;
+        memcpy(exe_dir, argv0, len);
+        exe_dir[len] = '\0';
+
+        join_data_dir(candidate, sizeof candidate, exe_dir);
+        if (is_directory(candidate)) return set_data_dir(candidate);
+
+        slash = strrchr(exe_dir, '/');
+        if (slash != NULL) {
+            size_t plen = (size_t)(slash - exe_dir);
+            if (plen == 0) plen = 1;
+            if (plen >= sizeof parent) plen = sizeof parent - 1;
+            memcpy(parent, exe_dir, plen);
+            parent[plen] = '\0';
+            join_data_dir(candidate, sizeof candidate, parent);
+            if (is_directory(candidate)) return set_data_dir(candidate);
+        }
+    }
+
+    /* 5. nothing found: start with an empty data folder in the current
+     *    directory so the program can still run and save its files. */
+    if (mkdir(DATA_DIR, 0755) == 0) {
+        set_data_dir(DATA_DIR);
+        return 1;
+    }
+    return -1;
+}
+
+/* =====================================================================
+ * 3. Run-time line cache (keeps main.c's File Resource Manager menu and
  *    the typed database consistent after every save).
  * ===================================================================== */
 
