@@ -243,6 +243,21 @@ cc -std=c11 -Wall -Wextra -pedantic -Iinclude src/*.c -o sdams
 bash tests/run_cases.sh ./sdams
 ```
 
+### Where the data folder is found
+
+The program looks for its data folder by itself, in this order: `./data`, then
+`../data` … `../../../../data`, then `<folder of the binary>/data` and the folder above
+it, and finally it creates an empty `./data`. The resolved path is printed at start-up:
+
+```
+Data directory: data
+```
+
+This is why the program also works when an IDE starts it inside `cmake-build-debug/`
+(that is the usual cause of `Warning: could not write to data/system.log` — the working
+directory had no `data/` folder). If you prefer to be explicit in CLion, set
+*Run → Edit Configurations → Working directory* to `$ProjectFileDir$`.
+
 ### Demo accounts
 
 | Role | ID | Password | Stored in |

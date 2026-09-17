@@ -83,3 +83,28 @@ Behaviour:
 - Missing files are treated as empty data, so a fresh clone boots with an empty system
   instead of an error.
 
+## Update — data directory resolution
+
+`data/` is no longer assumed to be relative to the working directory, because CLion
+starts the executable inside `cmake-build-debug/`, where `data/` does not exist (every
+write then failed with `Warning: could not write to data/system.log`).
+
+```c
+int         resolve_data_dir(const char *argv0);   /* 0 found, 1 created, -1 failed */
+int         set_data_dir(const char *dir);         /* explicit override            */
+const char *get_data_dir(void);                    /* used by log_event() and main.c */
+```
+
+`main()` calls `resolve_data_dir(argv[0])` **before the first log entry** and prints the
+resolved path. Probed candidates, first match wins:
+
+1. `./data`
+2. `../data` … `../../../../data` (build folder inside the project)
+3. `<folder of the executable>/data`
+4. `<parent of that folder>/data`
+5. otherwise `mkdir ./data` and start with an empty system
+
+`utils.c` (`log_event`) and `main.c` (File Resource Manager) build their paths from
+`get_data_dir()`, so all modules follow the resolved folder automatically.
+
+

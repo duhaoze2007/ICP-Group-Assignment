@@ -41,7 +41,6 @@ static void print_banner(void) {
 }
 
 static void init_system(void) {
-    print_banner();
     printf("\nSystem initializing and starting is in progress......\n");
     show_progress_bar();
     log_event("System memory initialized");
@@ -68,7 +67,7 @@ static void view_file_menu(void) {
         printf("ERROR: Filename cannot be empty.\n");
         return;
     }
-    snprintf(path, sizeof path, "%s/%s", DATA_DIR, fname);
+    snprintf(path, sizeof path, "%s/%s", get_data_dir(), fname);
 
     if (read_all_lines(path, &lines, &n) != 0) {
         printf("ERROR: Could not read %s.\n", path);
@@ -92,7 +91,7 @@ static void append_line_menu(void) {
     if (read_line("Enter the line to append: ", line, sizeof line) != 0) return;
     if (line[0] == '\0') { printf("ERROR: Line cannot be empty.\n"); return; }
 
-    snprintf(path, sizeof path, "%s/%s", DATA_DIR, fname);
+    snprintf(path, sizeof path, "%s/%s", get_data_dir(), fname);
     if (append_line(path, line) != 0) {
         printf("ERROR: Could not append to %s.\n", path);
         return;
@@ -143,7 +142,7 @@ static void overwrite_file_menu(void) {
         count++;
     }
 
-    snprintf(path, sizeof path, "%s/%s", DATA_DIR, fname);
+    snprintf(path, sizeof path, "%s/%s", get_data_dir(), fname);
     if (write_all_lines(path, lines, count) != 0) {
         printf("ERROR: Could not write %s.\n", path);
     } else {
@@ -158,11 +157,11 @@ static void list_files_menu(void) {
     char **files = NULL;
     size_t n = 0, i;
 
-    if (list_files_in_dir(DATA_DIR, &files, &n) != 0) {
-        printf("ERROR: Could not list %s.\n", DATA_DIR);
+    if (list_files_in_dir(get_data_dir(), &files, &n) != 0) {
+        printf("ERROR: Could not list %s.\n", get_data_dir());
         return;
     }
-    printf("\nFiles in %s/:\n", DATA_DIR);
+    printf("\nFiles in %s/:\n", get_data_dir());
     for (i = 0; i < n; i++) printf("  %2d. %s\n", (int)(i + 1), files[i]);
     if (n == 0) printf("  (no files)\n");
     free_lines(files, n);
@@ -230,16 +229,31 @@ static void route_role(Role role) {
  * 4. main()
  * ===================================================================== */
 
-int main(void) {
-    char choice;
-    char now[SHORT_LEN + 8];
+int main(int argc, char *argv[]) {
+    char  choice;
+    char  now[SHORT_LEN + 8];
+    int   data_ready;
+
+    (void)argc;
+    print_banner();
+
+    /* Locate the data folder BEFORE the first log entry, so the program also
+     * works when the IDE starts it from its build directory. */
+    data_ready = resolve_data_dir((argc > 0) ? argv[0] : NULL);
+    printf("\nData directory: %s\n", get_data_dir());
+    if (data_ready > 0) {
+        printf("(no existing data folder was found, so an empty one was created)\n");
+    } else if (data_ready < 0) {
+        fprintf(stderr, "ERROR: no usable data folder was found or created.\n");
+        fprintf(stderr, "Run the program from the project folder (the one containing data/).\n");
+    }
 
     init_system();
 
     if (load_all_data() != 0) {
         fprintf(stderr, "Warning: some data files could not be read. Continuing with empty data.\n");
     }
-    log_event("Data files loaded");
+    log_event("Data files loaded from %s", get_data_dir());
 
     while (1) {
         current_datetime(now, sizeof now, 1);
