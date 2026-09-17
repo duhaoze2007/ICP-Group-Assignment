@@ -259,7 +259,7 @@ int resolve_data_dir(const char *argv0) {
         const char *slash = strrchr(argv0, '/');
         size_t      len  = (size_t)(slash - argv0);
 
-        if (len == 0) len = 1;                    /* "/sdams" -> "/" */
+        if (len == 0) len = 1;
         if (len >= sizeof exe_dir) len = sizeof exe_dir - 1;
         memcpy(exe_dir, argv0, len);
         exe_dir[len] = '\0';

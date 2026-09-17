@@ -2,10 +2,6 @@
  * SDAMS - manager.c
  * Owner: M2 - Justin Loo (Authentication & Management Lead)
  *
- * Ported from the previous (FitZone) project's admin.py:
- *   admin.add_member()   -> add_admin_account()
- *   admin.delete_member() -> delete_admin_account()
- *   admin.view_all()     -> view_all_admins() + the two reports
  * The missing manager features of the previous project (staff report and
  * revenue report) are implemented through reports.c.
  *

@@ -2,15 +2,6 @@
  * SDAMS - utils.c
  * Owner: M1 - Du Haoze
  *
- * Ported and extended from the previous (FitZone) project's
- * utils.py + cli_utils.py + file_utils.py helper layer:
- *   cli_utils.valid_input()        -> read_choice()
- *   cli_utils.pause()              -> pause_screen()
- *   cli_utils.show_progress_bar()  -> show_progress_bar()
- *   utils.log()                    -> log_event()
- *   utils.passwd()                 -> check_password()
- *   utils.generate_booking_id()    -> make_id() / id_number()
- *
  * This module never calls fopen(): the activity log is appended through
  * append_line() from the file handler, the single owner of file I/O.
  * ===================================================================== */
