@@ -538,11 +538,12 @@ void log_event(const char *fmt, ...) {
     va_end(args);
 
     snprintf(line, sizeof line, "[%s] %s", stamp, message);
-    snprintf(path, sizeof path, "%s/%s", DATA_DIR, LOG_FILE);
+    snprintf(path, sizeof path, "%s/%s", get_data_dir(), LOG_FILE);
 
     if (append_line(path, line) != 0) {
-        /* Logging must never abort the program - warn only. */
-        fprintf(stderr, "Warning: could not write to %s\n", path);
+        /* Logging must never abort the program - warn only, but say why. */
+        fprintf(stderr, "Warning: could not write to %s "
+                        "(check that the program runs from the project folder)\n", path);
     }
 }
 
