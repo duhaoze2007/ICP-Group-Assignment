@@ -1,16 +1,15 @@
-/* =====================================================================
+/* ============================================================================
  * SDAMS - main.c
  * Owner: M1 - Du Haoze (Lead Architect & Integrator)
  *
- * Program entry point.  Ported from the previous (FitZone) project's
- * main.py, which printed a start-up banner, ran a progress bar, logged
- * the initialisation steps, showed a role menu and called the subsystem
+ * Program entry point. which printed a start-up banner, ran a progress bar,
+ * logged the initialisation steps, showed a role menu and called the subsystem
  * menu the user picked.
  *
  * In SDAMS the password prompt of each subsystem is replaced by a real
  * login (auth.c) and the data files are read into memory once at start
  * (load_all_data) and written back on exit (save_all_data).
- * ===================================================================== */
+ * =========================================================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +25,7 @@
 #include "../include/facility_officer.h"
 #include "../include/reports.h"
 
-#define VERSION "V1.0"
+#define VERSION "V1.1" // Please update this version string after you make changes to the program.
 
 /* =====================================================================
  * 1. Start-up (port of initsystem() from the previous project)
@@ -36,7 +35,7 @@ static void print_banner(void) {
     printf("\n");
     print_table_border(78);
     printf("  Self Defence Academy Management System (SDAMS)  %s\n", VERSION);
-    printf("  CT018-3-1-ICP Group Assignment\n");
+    // printf("  CT018-3-1-ICP Group Assignment\n");
     print_table_border(78);
 }
 
@@ -286,12 +285,15 @@ int main(int argc, char *argv[]) {
                 if (save_all_data() != 0) {
                     fprintf(stderr, "Warning: some data files could not be saved.\n");
                 } else {
-                    printf("\nAll data saved to file.\n");
+                    printf("System shutting down......\n");
+                    printf("\nPlease wait while saving data to files...\n\n");
+                    show_progress_bar();
+                    log_event("All data saved to file");
+                    printf("\nAll data checked OK and saved to file.\n");
                 }
                 log_event("System shutdown");
                 printf("Thank you for using SDAMS %s. Goodbye!\n", VERSION);
-                printf("System shutting down......\n");
-                show_progress_bar();
+                log_event("System successfully shut down");
                 printf("System successfully shut down.\n");
                 return 0;
             default:
