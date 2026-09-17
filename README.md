@@ -37,10 +37,11 @@ ICP-Group-Assignment/
 │   ├── students.txt              # Student info (ID|Name|Contact|Status)
 │   ├── classes.txt               # Class schedules (ClassID|InstructorID|MartialArt|DateTime|Capacity|BookedCount|Status)
 │   ├── bookings.txt              # Student bookings (BookingID|StudentID|ClassID|BookingDate|Status)
-│   ├── payments.txt              # Payment records (PaymentID|StudentID|ClassID|Amount|PaymentDate)
+│   ├── payments.txt              # Payment records (PaymentID|StudentID|ClassID|Amount|PaymentDate|Type)
 │   ├── ratings.txt               # Instructor ratings (RatingID|StudentID|InstructorID|Score|Comment|Date)
 │   ├── facility_issues.txt       # Facility issues (IssueID|InstructorID|Location|Description|Status|ReportedDate)
-│   └── equipment.txt             # Equipment inventory (EquipID|Name|Category|Quantity|Threshold|LastUpdated)
+│   ├── equipment.txt             # Equipment inventory (EquipID|Name|Category|Quantity|Threshold|LastUpdated)
+│   └── attendance.txt            # Class attendance  (ClassID|StudentID|Date|Status) – extra feature
 │
 ├── docs/                          # Documentation materials
 │   └── screenshots/              # Screenshots for the final PDF report
@@ -224,3 +225,44 @@ Appendix
 | **Phase 4: Testing & Screenshots** | Each member captures 2 positive + 2 negative test screenshots for their features. Write module explanations. | *Week 4* |
 | **Phase 5: Documentation Merge** | Everyone sends their sections to M1 (you). You compile the final PDF, TOC, Introduction, Conclusion, Workload Matrix. | *Week 5 (final)* |
 | **Phase 6: Demo Video** | Record final system walkthrough (5-10 mins). All members should speak for their modules. | *2 days before deadline* |
+
+* * *
+
+## 4\. Build, Run & Test
+
+The system is plain ANSI C (C11) with no external libraries. It builds either inside CLion (`CMakeLists.txt`) or straight from a terminal:
+
+```bash
+# 1. build
+cc -std=c11 -Wall -Wextra -pedantic -Iinclude src/*.c -o sdams
+
+# 2. run (always from the project root: the data files live in ./data)
+./sdams
+
+# 3. scripted regression cases (6 cases, each in its own sandbox under /tmp)
+bash tests/run_cases.sh ./sdams
+```
+
+### Demo accounts
+
+| Role | ID | Password | Stored in |
+| --- | --- | --- | --- |
+| Manager | `A001` | `123456` | `data/admins.txt` |
+| Administrator | `A002` | `123456` | `data/admins.txt` |
+| Facility Officer | `A005` | `123456` | `data/admins.txt` |
+| Instructor | `I001` | `123456` | `data/instructors.txt` + default password |
+| Student | `S001` | `123456` | `data/students.txt` + default password |
+
+**Assumption (to be listed in the report):** staff accounts (manager / administrator / facility officer) keep their password inside `admins.txt`, while student and instructor records have no password field, so they sign in with the default password `123456` and must have `status = active`. Passwords are stored in plain text because the brief only requires text-file persistence.
+
+### Implementation status
+
+| Module | Owner | Status |
+| --- | --- | --- |
+| `main.c`, `file_handler.c`, `utils.c`, `reports.c`, `common.h` | M1 Du Haoze | done |
+| `auth.c`, `manager.c` | M2 Justin Loo | done |
+| `admin.c` | M3 Htoo Aung Htet | done |
+| `student.c`, `instructor.c` | M4 Lhaksam T. Geltsan | done |
+| `facility_officer.c` | M5 Rehan Ali | done |
+
+The logic of this C system was ported from our previous semester's Python project (*FitZone Gym Management System*). Module-by-module and function-by-function mapping, including what was **not** portable and what had to be added for the SDAMS brief, is documented in [`docs/python-to-c-mapping.md`](docs/python-to-c-mapping.md).

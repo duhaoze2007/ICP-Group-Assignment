@@ -1,0 +1,4 @@
+I001|Ethan Carter|Karate|011-2233445|active|5.00
+I002|Sophia Bennett|Judo|012-3344556|active|4.00
+I003|Zhang Haoran|Taekwondo|016-7788990|active|0.00
+I004|Amelia Foster|MMA|017-1122334|not active|0.00
