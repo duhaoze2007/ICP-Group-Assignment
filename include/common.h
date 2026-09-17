@@ -1,7 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-typedef struct 
+typedef struct
 {
     char id[5];
     char name[50];
