@@ -238,9 +238,6 @@ cc -std=c11 -Wall -Wextra -pedantic -Iinclude src/*.c -o sdams
 
 # 2. run (always from the project root: the data files live in ./data)
 ./sdams
-
-# 3. scripted regression cases (6 cases, each in its own sandbox under /tmp)
-bash tests/run_cases.sh ./sdams
 ```
 
 ### Where the data folder is found

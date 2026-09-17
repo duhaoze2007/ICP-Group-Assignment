@@ -81,7 +81,10 @@ Behaviour:
   `save_xxx()`. `main.c` also calls `reload_all_data()` after a raw edit made through
   the File Resource Manager menu.
 - Missing files are treated as empty data, so a fresh clone boots with an empty system
-  instead of an error.
+  instead of an error. Because such a file is created again (empty) by the next
+  `save_xxx()`, every missing data file is reported at start-up:
+  `Note: <path> does not exist - starting with 0 <entity> record(s).`
+
 
 ## Update — data directory resolution
 

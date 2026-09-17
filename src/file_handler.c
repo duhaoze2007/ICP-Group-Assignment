@@ -210,6 +210,12 @@ static int is_directory(const char *path) {
     return S_ISDIR(st.st_mode) ? 1 : 0;
 }
 
+static int file_exists(const char *path) {
+    struct stat st;
+    if (path == NULL || path[0] == '\0') return 0;
+    return (stat(path, &st) == 0) ? 1 : 0;
+}
+
 /* Join a base folder with the data folder name:  "proj" -> "proj/data",
  * "." and "" -> "data". */
 static void join_data_dir(char *out, size_t size, const char *base) {
@@ -539,12 +545,16 @@ static int parse_attendance(const char *line, Attendance *a) {
  * short and identical in behaviour (parse, skip bad lines, mirror into
  * the line cache).
  */
-#define LOAD_ENTITY(file_name, list_expr, parse_fn, type_name)                  \
+#define LOAD_ENTITY(file_name, label, list_expr, parse_fn, type_name)           \
     do {                                                                        \
         char  **lines = NULL;                                                   \
         size_t  n = 0, i;                                                       \
         char    path[64];                                                       \
         data_path(path, sizeof path, file_name);                                \
+        if (!file_exists(path)) {                                               \
+            fprintf(stderr, "Note: %s does not exist - starting with 0 %s record(s).\n", \
+                    path, label);                                               \
+        }                                                                       \
         if (read_all_lines(path, &lines, &n) != 0) return -1;                   \
         (list_expr).count = 0;                                                  \
         for (i = 0; i < n; i++) {                                               \
@@ -625,25 +635,25 @@ static void fmt_attendance(const Attendance *a, char *buf, size_t size) {
              attendance_status_to_string(a->status));
 }
 
-int load_admins(void)          { LOAD_ENTITY(ADMIN_FILE, g_data.admins, parse_account, UserAccount); }
+int load_admins(void)          { LOAD_ENTITY(ADMIN_FILE, "staff account", g_data.admins, parse_account, UserAccount); }
 int save_admins(void)          { SAVE_ENTITY(ADMIN_FILE, g_data.admins, fmt_account); }
-int load_instructors(void)     { LOAD_ENTITY(INSTRUCTOR_FILE, g_data.instructors, parse_instructor, Instructor); }
+int load_instructors(void)     { LOAD_ENTITY(INSTRUCTOR_FILE, "instructor", g_data.instructors, parse_instructor, Instructor); }
 int save_instructors(void)     { SAVE_ENTITY(INSTRUCTOR_FILE, g_data.instructors, fmt_instructor); }
-int load_students(void)        { LOAD_ENTITY(STUDENT_FILE, g_data.students, parse_student, Student); }
+int load_students(void)        { LOAD_ENTITY(STUDENT_FILE, "student", g_data.students, parse_student, Student); }
 int save_students(void)        { SAVE_ENTITY(STUDENT_FILE, g_data.students, fmt_student); }
-int load_classes(void)         { LOAD_ENTITY(CLASS_FILE, g_data.classes, parse_class, ClassRecord); }
+int load_classes(void)         { LOAD_ENTITY(CLASS_FILE, "class", g_data.classes, parse_class, ClassRecord); }
 int save_classes(void)         { SAVE_ENTITY(CLASS_FILE, g_data.classes, fmt_class); }
-int load_bookings(void)        { LOAD_ENTITY(BOOKING_FILE, g_data.bookings, parse_booking, Booking); }
+int load_bookings(void)        { LOAD_ENTITY(BOOKING_FILE, "booking", g_data.bookings, parse_booking, Booking); }
 int save_bookings(void)        { SAVE_ENTITY(BOOKING_FILE, g_data.bookings, fmt_booking); }
-int load_payments(void)        { LOAD_ENTITY(PAYMENT_FILE, g_data.payments, parse_payment, Payment); }
+int load_payments(void)        { LOAD_ENTITY(PAYMENT_FILE, "payment", g_data.payments, parse_payment, Payment); }
 int save_payments(void)        { SAVE_ENTITY(PAYMENT_FILE, g_data.payments, fmt_payment); }
-int load_ratings(void)         { LOAD_ENTITY(RATING_FILE, g_data.ratings, parse_rating, Rating); }
+int load_ratings(void)         { LOAD_ENTITY(RATING_FILE, "rating", g_data.ratings, parse_rating, Rating); }
 int save_ratings(void)         { SAVE_ENTITY(RATING_FILE, g_data.ratings, fmt_rating); }
-int load_facility_issues(void) { LOAD_ENTITY(ISSUE_FILE, g_data.issues, parse_issue, FacilityIssue); }
+int load_facility_issues(void) { LOAD_ENTITY(ISSUE_FILE, "facility issue", g_data.issues, parse_issue, FacilityIssue); }
 int save_facility_issues(void) { SAVE_ENTITY(ISSUE_FILE, g_data.issues, fmt_issue); }
-int load_equipment(void)       { LOAD_ENTITY(EQUIPMENT_FILE, g_data.equipment, parse_equipment, Equipment); }
+int load_equipment(void)       { LOAD_ENTITY(EQUIPMENT_FILE, "equipment", g_data.equipment, parse_equipment, Equipment); }
 int save_equipment(void)       { SAVE_ENTITY(EQUIPMENT_FILE, g_data.equipment, fmt_equipment); }
-int load_attendance(void)      { LOAD_ENTITY(ATTENDANCE_FILE, g_data.attendance, parse_attendance, Attendance); }
+int load_attendance(void)      { LOAD_ENTITY(ATTENDANCE_FILE, "attendance", g_data.attendance, parse_attendance, Attendance); }
 int save_attendance(void)      { SAVE_ENTITY(ATTENDANCE_FILE, g_data.attendance, fmt_attendance); }
 
 /* =====================================================================

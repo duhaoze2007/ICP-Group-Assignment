@@ -66,6 +66,8 @@ The File Resource Manager options 3 and 4 write directly to disk through
 `append_line()` / `write_all_lines()` and then call `reload_all_data()`, so the typed
 database can never drift from the files on disk.
 
-Regression scripts for all of this live in `tests/` — run `bash tests/run_cases.sh ./sdams`.
+All data lives in the single `data/` folder of the project; the system is verified by
+building it with strict warnings and walking through the menus of each role from the
+project root.
 
 
