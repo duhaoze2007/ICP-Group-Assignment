@@ -48,6 +48,26 @@ void data_store_reset(void);  /* empty the in-memory database          */
 int get_cached_lines(const char *filename, char ***out_lines, size_t *out_count);
 int set_cached_lines(const char *filename, char **lines, size_t count);
 
+/* ---------------- 3b. Data directory resolution ----------------
+ * The program reads/writes "<data dir>/<file>.txt".  The data directory is
+ * NOT hard-wired to the current working directory any more, because an IDE
+ * (CLion) starts the executable from its build folder, which would make
+ * every file operation fail.
+ *
+ * resolve_data_dir(argv0) probes, in this order:
+ *   1. ./data
+ *   2. ../data ... ../../../../data           (IDE build directory inside the project)
+ *   3. <folder of the executable>/data        (binary copied next to its data)
+ *   4. <parent of the executable folder>/data (build dir inside the project)
+ * and, when nothing exists yet, creates ./data so the system can still start.
+ *
+ * Return value: 0 = existing data directory found,
+ *               1 = ./data was created (fresh start),
+ *              -1 = no directory could be found or created. */
+int         resolve_data_dir(const char *argv0);
+int         set_data_dir(const char *dir);
+const char *get_data_dir(void);
+
 /* ---------------- 4. Typed entity layer ----------------
  * One load_xxx() / save_xxx() pair per data file, as required by
  * README.md section "Module Responsibilities".
