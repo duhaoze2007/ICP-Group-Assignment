@@ -1,0 +1,2 @@
+F001|I001|Dojo Hall A|Two floor mats are torn|pending|2026-09-15
+F002|I003|Equipment Room|Punching bag strap broken|fixed|2026-09-10
