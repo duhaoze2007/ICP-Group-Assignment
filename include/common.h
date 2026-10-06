@@ -1,3 +1,27 @@
+/* =====================================================================
+ * SDAMS - Self Defence Academy Management System
+ * common.h - shared symbolic constants, enumerations and structures
+ *
+ * Owner : M1 - Du Haoze (Lead Architect & Integrator)
+ * Subject: CT018-3-1-ICP
+ *
+ * Every record of every entity lives in ONE line of ONE text file.
+ * Fields are separated by '|' (pipe).  Record formats:
+ *
+ *   data/admins.txt          ID|Name|Password|Status
+ *   data/instructors.txt     ID|Name|Role|Contact|Status|AvgRating
+ *   data/students.txt        ID|Name|Contact|Status
+ *   data/classes.txt         ClassID|InstructorID|MartialArt|DateTime|Capacity|
+ *                            BookedCount|Status
+ *   data/bookings.txt        BookingID|StudentID|ClassID|BookingDate|Status
+ *   data/payments.txt        PaymentID|StudentID|ClassID|Amount|PaymentDate|Type
+ *   data/ratings.txt         RatingID|StudentID|InstructorID|Score|Comment|Date
+ *   data/facility_issues.txt IssueID|InstructorID|Location|Description|Status|
+ *                            ReportedDate
+ *   data/equipment.txt       EquipID|Name|Category|Quantity|Threshold|LastUpdated
+ *   data/attendance.txt      ClassID|StudentID|Date|Status      (extra feature)
+ * ===================================================================== */
+
 #ifndef COMMON_H
 #define COMMON_H
 

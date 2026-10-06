@@ -1,0 +1,5 @@
+S001|Tan Wei Ming|012-3456789|active
+S002|Lim Mei Ling|013-9876543|active
+S003|Arun Kumar|016-2223344|active
+S004|Nurul Aisyah|019-5556677|active
+S005|Jason Teo|011-8889900|not active

@@ -1,0 +1,23 @@
+# ninja log v7
+2	43	1789619908265848205	CMakeFiles/ICP_Group_Assignment.dir/src/auth.c.o	3f3be81005c67843
+3	44	1789619908266211663	CMakeFiles/ICP_Group_Assignment.dir/src/instructor.c.o	8c478c07ffdd29b5
+4	49	1789619908267233413	CMakeFiles/ICP_Group_Assignment.dir/src/utils.c.o	4deda58168881d71
+2	52	1789619908265632538	CMakeFiles/ICP_Group_Assignment.dir/src/admin.c.o	78c14816eccd8228
+3	54	1789619397660168197	CMakeFiles/ICP_Group_Assignment.dir/src/reports.c.o	f2adba8f76822734
+3	45	1789619908266499455	CMakeFiles/ICP_Group_Assignment.dir/src/manager.c.o	fe0117379bfbece3
+3	44	1789619908266936247	CMakeFiles/ICP_Group_Assignment.dir/src/student.c.o	45ea6d4ad37dee4f
+2	45	1789619908265973580	CMakeFiles/ICP_Group_Assignment.dir/src/facility_officer.c.o	ff422702c29ea0e4
+3	48	1789619908266341538	CMakeFiles/ICP_Group_Assignment.dir/src/main.c.o	cf7e3d6eb5ebde4c
+2	61	1789619908266091330	CMakeFiles/ICP_Group_Assignment.dir/src/file_handler.c.o	3ee5f3c3f8ac53b5
+61	91	1789619908324965435	ICP_Group_Assignment	cfd6efea943b2afb
+0	44	1789626094079480516	CMakeFiles/ICP_Group_Assignment.dir/src/file_handler.c.o	3ee5f3c3f8ac53b5
+44	76	1789626094123320203	ICP_Group_Assignment	cfd6efea943b2afb
+2	32	1789626829531050239	CMakeFiles/ICP_Group_Assignment.dir/src/manager.c.o	fe0117379bfbece3
+1	33	1789626829530767614	CMakeFiles/ICP_Group_Assignment.dir/src/main.c.o	cf7e3d6eb5ebde4c
+2	37	1789626829531235656	CMakeFiles/ICP_Group_Assignment.dir/src/utils.c.o	4deda58168881d71
+1	46	1789626829530522906	CMakeFiles/ICP_Group_Assignment.dir/src/file_handler.c.o	3ee5f3c3f8ac53b5
+46	76	1789626829575316968	ICP_Group_Assignment	cfd6efea943b2afb
+0	33	1789627209161355837	CMakeFiles/ICP_Group_Assignment.dir/src/main.c.o	cf7e3d6eb5ebde4c
+33	64	1789627209194156576	ICP_Group_Assignment	cfd6efea943b2afb
+3	36	1789629779939288801	CMakeFiles/ICP_Group_Assignment.dir/src/main.c.o	cf7e3d6eb5ebde4c
+36	70	1789629779971899488	ICP_Group_Assignment	cfd6efea943b2afb

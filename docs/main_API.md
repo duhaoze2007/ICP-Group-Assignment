@@ -36,3 +36,38 @@ Developer checklist
 - Use `get_cached_lines()` to read, `set_cached_lines()` to update the runtime cache, and `save_all_data()` to persist.
 - Add login/authentication in `auth.c` and integrate with role menu routing.
 
+## Update — current implementation
+
+The role areas are no longer placeholders. The flow of `main()` is now:
+
+1. `init_system()` — banner, animated progress bar and the start-up log entries
+   (same messages as the previous project's `initsystem()`).
+2. `load_all_data()` — one read of every `data/*.txt` file into `g_data`; a failure
+   only prints a warning.
+3. Main menu loop (current time is printed above the menu, like `main.py` did):
+
+   ```
+   1. Manager           -> auth_login(ROLE_MANAGER)    -> manager_menu()
+   2. Administrator     -> auth_login(ROLE_ADMIN)      -> admin_menu()
+   3. Instructor        -> auth_login(ROLE_INSTRUCTOR) -> instructor_menu()
+   4. Student           -> auth_login(ROLE_STUDENT)    -> student_menu()
+   5. Facility Officer  -> auth_login(ROLE_FACILITY)   -> facility_officer_menu()
+   6. File Resource Manager (list / view / append / overwrite / record counts)
+   7. Save & Exit
+   ```
+
+   A failed or cancelled login logs `Security System: <role> login failed` and returns
+   to the main menu. Every role menu has `0. Logout and back`, which calls
+   `auth_logout()` and closes the session.
+4. `Save & Exit` writes every file with `save_all_data()`, logs `System shutdown`,
+   animates the progress bar and returns 0.
+
+The File Resource Manager options 3 and 4 write directly to disk through
+`append_line()` / `write_all_lines()` and then call `reload_all_data()`, so the typed
+database can never drift from the files on disk.
+
+All data lives in the single `data/` folder of the project; the system is verified by
+building it with strict warnings and walking through the menus of each role from the
+project root.
+
+
